@@ -1,0 +1,125 @@
+-- SELECT문 기초
+SELECT EMPNO, ENAME, DEPTNO 
+    FROM EMP;
+
+ -- 중복 제거    
+SELECT DISTINCT DEPTNO 
+    FROM EMP;
+
+--AS 컬럼 명 변경    
+SELECT ENAME, SAL AS YEAR_SAL 
+    FROM EMP 
+    ORDER BY YEAR_SAL; 
+ 
+SELECT DEPTNO, ENAME 
+    FROM EMP 
+    ORDER BY DEPTNO DESC, ENAME;
+    
+SELECT ENAME 
+    FROM EMP
+    WHERE DEPTNO = '30'; 
+    
+SELECT * 
+    FROM EMP 
+    WHERE JOB = 'SALESMAN' AND DEPTNO = '30';
+
+ -- 산술 연산 가능    
+SELECT ENAME, SAL 
+    FROM EMP 
+    WHERE SAL * 12 >= 30000;
+    
+SELECT * 
+    FROM EMP 
+    WHERE DEPTNO = '20' OR JOB = 'SALESMAN';
+    
+SELECT *
+    FROM EMP 
+    WHERE SAL >= 2500 AND JOB = 'ANALYST';
+
+--ENAME 첫 문자가 F 이상    
+SELECT ENAME 
+    FROM EMP
+    WHERE ENAME >= 'F' 
+    ORDER BY ENAME; 
+    
+SELECT * FROM EMP WHERE ENAME <= 'FORZ' ORDER BY ENAME; --첫문자 동일시 그 이후 비교 
+
+-- 아래 3가지 모두 Not Equal 연산자 <>가 가장 주로 쓰임
+SELECT * 
+    FROM EMP 
+    WHERE JOB <> 'SALESMAN';
+SELECT * 
+    FROM EMP 
+    WHERE JOB != 'SALESMAN';
+SELECT * 
+    FROM EMP 
+    WHERE JOB ^= 'SALESMAN';
+    
+SELECT * 
+    FROM EMP 
+    WHERE NOT JOB = 'SALESMAN'; --IN, BETWEEEN, IS NULL과 같이 쓸때
+
+--직책이 MANAGER 이거나 SALESMAN이거나 CLERK 인 사원
+SELECT * 
+    FROM EMP 
+    WHERE JOB = 'MANAGER' OR JOB = 'SALESMAN' OR JOB = 'CLERK';
+--IN 연산자 사용
+SELECT * 
+    FROM EMP 
+    WHERE JOB IN ('MANAGER', 'SALESMAN', 'CLERK');
+--NOT IN
+SELECT * 
+    FROM EMP 
+    WHERE JOB NOT IN ('MANAGER', 'SALESMAN', 'CLERK');
+
+--부서 번호가 10, 20번인 사원 정보
+SELECT *
+    FROM EMP
+    WHERE DEPTNO IN (10, 20);
+
+--SAL 2000 이상 3000 이하인 사원 이름, 월급
+SELECT ENAME, SAL
+    FROM EMP
+    WHERE SAL >= 2000 AND SAL <= 3000;
+    
+--BETWEEN A AND B
+SELECT ENAME, SAL
+    FROM EMP
+    WHERE SAL BETWEEN 2000 AND 3000;
+    
+--LIKE와 와일드 카드 (일부 문자열을 포함하는 문자열을 검색할 때)
+SELECT *
+    FROM EMP
+    WHERE ENAME LIKE 'S%'; --S로 시작하는 문자열
+SELECT *
+    FROM EMP
+    WHERE ENAME LIKE '%S%';--S가 들어가있는 모든 문자열
+SELECT *
+    FROM EMP
+    WHERE ENAME LIKE '%S'; --S로 끝나는 문자열
+SELECT *
+    FROM EMP
+    WHERE ENAME LIKE '_L%'; --맨앞자리 무관 둘째자리 L로 시작하는 문자열
+    
+--사원 이름에 L이 들어가있지 않은 사원
+SELECT *
+    FROM EMP
+    WHERE ENAME NOT LIKE '%L%';
+
+--NULL
+SELECT *
+    FROM EMP
+    WHERE COMM IS NULL;
+    
+--MGR 이 NULL인 사람들
+SELECT ENAME
+    FROM EMP
+    WHERE MGR IS NULL;
+--NULL이 아닌 사람들
+SELECT ENAME
+    FROM EMP
+    WHERE MGR IS NOT NULL;
+    
+SELECT *
+    FROM EMP
+    WHERE SAL > NULL AND COMM IS NULL;
