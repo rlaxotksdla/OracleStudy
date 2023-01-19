@@ -1,4 +1,4 @@
-SELECT *
+aSELECT *
 FROM emp;
 
 DESC emp;
@@ -471,7 +471,7 @@ SELECT
 FROM
 	emp e1,
 	emp e2
-WHERE e1.mgr = e2.empno(+); --empno를 전부 출력(다른값이 null이어도)
+WHERE e1.mgr = e2.empno;
 
 --오른쪽 외부 조인
 SELECT
@@ -498,3 +498,4 @@ FROM
 	emp e2
 WHERE e1.mgr(+) = e2.empno --empno를 전부 출력(다른값이 null이어도)
 ORDER BY e1.empno;
+
